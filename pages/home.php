@@ -10,11 +10,11 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="dist/css/ionicons.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="dist/css/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -143,10 +143,10 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-  <?php include_once("main_sidebar.php"); ?>
-<!-- /.sidebar -->
-</aside>
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <?php include_once("main_sidebar.php"); ?>
+  <!-- /.sidebar -->
+  </aside>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -198,13 +198,7 @@
   </div>
   <!-- /.content-wrapper -->
 
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.0.0
-    </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-    reserved.
-  </footer>
+  <?php include_once('footer.php'); ?>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

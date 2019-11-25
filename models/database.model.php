@@ -1,18 +1,22 @@
 <?php
-class Database{
+class Database {
 	private static $mysqli = null;
 	
 	static function connect() {
 		if (isset(self::$mysqli) && self::$mysqli->ping()) {
-			self::$mysqli->close();
+			//self::$mysqli->close();
+			return true;
 		}
-		self::$mysqli = new mysqli("localhost:3307", "root", "", "vadmin");
+		self::$mysqli = new mysqli(
+			$GLOBALS['DB_URL'].':'.$GLOBALS['DB_PORT'],
+			$GLOBALS['DB_USER'],
+			$GLOBALS['DB_PASS'],
+			$GLOBALS['DB_NAME']);
 		/* check connection */
 		if (self::$mysqli->connect_error) {
 			echo "Connect failed: " . self::$mysqli->connect_error . "\n";
 			return false;
 		}
-
 		return true;
 	}
 
@@ -21,6 +25,8 @@ class Database{
 			self::connect();
 			$stmt = self::$mysqli->prepare($query);
 			$s = str_repeat('s', count($params));
+			// $params = array_map('htmlspecialchars', array_map('addslashes', $params));
+			$params = array_map('htmlspecialchars', $params);
 			$stmt->bind_param($s, ...$params);
 			$stmt->execute();
 			return $stmt->get_result();
@@ -34,7 +40,7 @@ class Database{
 	static function execute_query_with_prepared_statement_and_first_row($query, $params=array()){
 		$result = execute_query_with_prepared_statement($query, $params);
 		if($result->num_rows === 0) {
-			return false;
+			return "";
 		} else {
 			return $result->fetch_assoc();
 		}

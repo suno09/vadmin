@@ -1,19 +1,42 @@
 <?php
-include_once("./classes/header.class.php");
-if(isset($_GET['logout'])){
-	$_SESSION = array();
-	session_destroy();
-	setcookie("token_sundev_vadmin", "", time()+3600, null, null, false, true);
-	unset($user);
-	header("Location:index.php");
-} else if(isset($_POST['login'])){
-	$user = new User($_POST['username'], $_POST['password']);
-} else if(isset($_COOKIE['token_sundev_vadmin']) && $_COOKIE['token_sundev_vadmin']!=""){
-	$user = new User($_COOKIE['token_sundev_vadmin']);
-} else{
-	$user = new User();
+session_start();
+include_once("./models/header.model.php");
+
+function show_on_screen() {
+	if(isset($_GET['message'])){
+		include_once("./pages/message.php");
+	}
+	else {
+		include_once("./pages/home.php");
+	}
 }
 
-$screen = new Screen($user);
-echo $screen;
+if(isset($_GET['logout'])){ // logout
+	$_SESSION = array();
+	session_destroy();
+	header("Location:index.php");
+} else if(isset($_POST['login'])) { // login by user and pass
+	$result = Database::execute_query_with_prepared_statement(
+		"select * from users where username = lower(?) and password = PASSWORD(?);",
+		array($_POST['username'], md5($_POST['password'])));
+	
+	if($result->num_rows === 0) { // error password or username
+		$_SESSION['session_connected'] = 2;
+		include_once("./pages/error.html");
+	} else if($row = $result->fetch_assoc()) {
+		// setcookie(name, value, expire, path, domain, secure, httponly);
+		$_SESSION['session_id_user'] = $row['id_user'];
+		$_SESSION['session_username'] = $row['username'];
+		$_SESSION['session_type'] = $row['type'];	
+		$_SESSION['session_active'] = $row['active'];
+		$_SESSION['session_connected'] = 1; // connexion OK
+		$_SESSION['session_expire'] = time() + $session_duration;
+		show_on_screen();
+	}
+} else if(isset($_SESSION['session_username']) && $_SESSION['session_expire'] > time()){
+	show_on_screen();
+} else{
+	session_destroy();
+	include_once('./pages/login.php');
+}
 ?>
