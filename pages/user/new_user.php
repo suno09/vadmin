@@ -13,7 +13,7 @@
               <div class="form-group row">
                 <label for="inputNewUsername" class="col-sm-3 col-form-label">Username</label>
                 <div class="col-sm-9">
-                <input type="text" class="form-control" placeholder="Username" name="new_username" minlength="5" required>
+                <input type="text" class="form-control" placeholder="Username" id="new_username" name="new_username" minlength="5" required autofocus>
                 </div>
               </div>
               <div class="form-group row">
@@ -35,7 +35,7 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button type="submit" class="btn btn-primary">Valider</button>
-              <button type="reset" class="btn btn-default" data-dismiss="modal">Annuler</button>
+              <button type="reset" class="btn btn-default" data-dismiss="modal" onclick="reset_form_new_user()">Annuler</button>
             </div>
 </form>
           </div>
@@ -86,5 +86,9 @@
               },
         });
     });
-    
+
+  function reset_form_new_user() {
+    $('#form-new-user')[0].reset();
+    $('#new_username').focus();
+  }
 </script>

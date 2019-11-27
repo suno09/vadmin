@@ -1,7 +1,7 @@
 <?php
 $DB_NAME = "vadmin";
 $DB_URL = "localhost";
-$DB_PORT = "3306";
+$DB_PORT = "3307";
 $DB_USER = "root";
 $DB_PASS = "";
 

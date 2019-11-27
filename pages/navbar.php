@@ -51,14 +51,15 @@
 <script>
 
 function logout(){ 
-    var a = document.createElement("a");
-    a.href = "index.php?logout";
-    var clickEvent = new MouseEvent("click", {
-        "view": window,
-        "bubbles": true,
-        "cancelable": false
-    });
-    a.dispatchEvent(clickEvent);}
+  var a = document.createElement("a");
+  a.href = "index.php?logout";
+  var clickEvent = new MouseEvent("click", {
+      "view": window,
+      "bubbles": true,
+      "cancelable": false
+  });
+  a.dispatchEvent(clickEvent);
+}
 </script>
 
 <?php include_once('user/new_user.php'); ?>
