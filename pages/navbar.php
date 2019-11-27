@@ -8,15 +8,15 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <!-- Add Action -->
-      <li class="nav-item dropdown">
+      <!-- New user -->
+      <li class="nav-item" data-toggle="modal" data-target="#modal-new-user">
         <a class="nav-link" href="#">
         <i class="fas fa-plus-circle"></i>
-        Nouveau Produit
+        Nouveau Utilisateur
         </a>  
       </li>
       <!-- Logout Menu -->
-      <li class="nav-item" data-toggle="modal" data-target="#modal-default">
+      <li class="nav-item" data-toggle="modal" data-target="#modal-logout">
         <a class="nav-link" href="#">
         <i class="fas fa-sign-out-alt"></i>
             Déconnexion
@@ -26,7 +26,7 @@
 </nav>
 
 <!-- logout modal -->
-<div class="modal fade" id="modal-default">
+<div class="modal fade" id="modal-logout">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -36,11 +36,11 @@
               </button>
             </div>
             <div class="modal-body">
-              <p>Voulez vous déconnecter&hellip;</p>
+              <p>Voulez vous déconnecter ?</p>
             </div>
             <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
               <button type="button" class="btn btn-primary" onclick="logout()">Oui</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -49,6 +49,7 @@
       </div>
 
 <script>
+
 function logout(){ 
     var a = document.createElement("a");
     a.href = "index.php?logout";
@@ -59,3 +60,5 @@ function logout(){
     });
     a.dispatchEvent(clickEvent);}
 </script>
+
+<?php include_once('user/new_user.php'); ?>

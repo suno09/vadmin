@@ -3,5 +3,5 @@
       <b>Version</b> <?php echo $GLOBALS['VERSION']; ?>
     </div>
     <strong>Copyright &copy; <?php echo date('Y'); ?> <a href="index.php" ><?php echo $GLOBALS['COMPANY'] ?></a>.</strong> 
-    All rights reserved.
+    Tous les droits sont réservés.
 </footer>
