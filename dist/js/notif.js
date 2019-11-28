@@ -19,6 +19,5 @@ function notif(type, message) {
         case 'warning':
             toastr.warning(message);
             break;
-        
     }
 }

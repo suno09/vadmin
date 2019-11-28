@@ -8,9 +8,9 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <!-- New user -->
-      <li class="nav-item" data-toggle="modal" data-target="#modal-new-user">
-        <a class="nav-link" href="#">
+      <!-- New user  data-target="#modal-new-user"-->
+      <li class="nav-item" >
+        <a class="nav-link" href="#" onclick="init_form_new_user();">
         <i class="fas fa-plus-circle"></i>
         Nouveau Utilisateur
         </a>  
@@ -47,9 +47,8 @@
         </div>
         <!-- /.modal-dialog -->
       </div>
-
+      
 <script>
-
 function logout(){ 
   var a = document.createElement("a");
   a.href = "index.php?logout";

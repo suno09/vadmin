@@ -1,4 +1,6 @@
 <?php
+include_once('info.model.php');
+
 class Database {
 	private static $mysqli = null;
 	
