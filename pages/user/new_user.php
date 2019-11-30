@@ -13,19 +13,19 @@
           <div class="form-group row">
             <label for="inputNewUsername" class="col-sm-3 col-form-label">Username</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" placeholder="Username" id="new_username" name="new_username" minlength="5" required autofocus>
+              <input type="text" class="form-control" placeholder="Username" id="new-username" name="username" required autofocus>
             </div>
           </div>
           <div class="form-group row">
             <label for="inputNewPassword" class="col-sm-3 col-form-label">Mot de passe</label>
             <div class="col-sm-9">
-              <input type="password" class="form-control" id="inputPassword3" placeholder="Mot de passe" name="new_password" minlength="5" required>
+              <input type="password" class="form-control" id="new-password" placeholder="Mot de passe" name="password" required>
             </div>
           </div>
           <div class="form-group row">
             <label for="inputTypeUser" class="col-sm-3 col-form-label">Role</label>
             <div class="col-sm-9">
-              <select class="form-control" name="new_role">
+              <select class="form-control" name="role" id="new-role">
                 <option value="1">ADMIN</option>
                 <option value="2">GERANT</option>
                 <option value="3">VENDEUR</option>
@@ -65,16 +65,15 @@
       url: "models/user.model.php",
       type: "post",
       timeout: 30000,
-      data: $('#form-new-user').serialize(),
+      data: "action=insert&" + $('#form-new-user').serialize(),
       cache: false,
       success: function(response) {
         jresponse = JSON.parse(response);
         if (jresponse.type == 1) {
           notif('success', jresponse.message);
-          console.log(jresponse.type)
+          setTimeout(function(){ window.location.reload(false); }, 1000);
         } else {
           notif('error', jresponse.message);
-          console.log(jresponse.type)
         }
       },
       error: function() {},

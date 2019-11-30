@@ -26,10 +26,33 @@ class Database {
 		try {
 			self::connect();
 			$stmt = self::$mysqli->prepare($query);
-			$s = str_repeat('s', count($params));
-			// $params = array_map('htmlspecialchars', array_map('addslashes', $params));
-			$params = array_map('htmlspecialchars', $params);
-			$stmt->bind_param($s, ...$params);
+			if (count($params) > 0) {
+				$s = str_repeat('s', count($params));
+				// $params = array_map('htmlspecialchars', array_map('addslashes', $params));
+				$params = array_map('htmlspecialchars', $params);
+				$stmt->bind_param($s, ...$params);
+			}
+			
+			$stmt->execute();
+			return $stmt->get_result();
+		} catch (Exception $e) {
+			error_log($e->getMessage());
+			exit('Error connecting to database'); //Should be a message a typical user could understand
+			return false;  
+		}
+	}
+
+	static function execute_multi_queries_with_prepared_statement($query=array(), $params=array()){
+		try {
+			self::connect();
+			$stmt = self::$mysqli->prepare($query);
+			if (count($params) > 0) {
+				$s = str_repeat('s', count($params));
+				// $params = array_map('htmlspecialchars', array_map('addslashes', $params));
+				$params = array_map('htmlspecialchars', $params);
+				$stmt->bind_param($s, ...$params);
+			}
+			
 			$stmt->execute();
 			return $stmt->get_result();
 		} catch (Exception $e) {
