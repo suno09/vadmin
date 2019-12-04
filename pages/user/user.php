@@ -52,6 +52,9 @@
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables -->
+<script src="plugins/datatables/jquery.dataTables.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <!-- SweetAlert2 -->
 <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
@@ -61,5 +64,19 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <script src="dist/js/notif.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#id-datatable-user").DataTable();
+    // $('#id-datatable-user').DataTable({
+    //   "paging": true,
+    //   "lengthChange": false,
+    //   "searching": true,
+    //   "ordering": true,
+    //   "info": true,
+    //   "autoWidth": false,
+    // });
+  });
+</script>
 </body>
 </html>

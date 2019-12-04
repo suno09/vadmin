@@ -13,27 +13,20 @@ $result = Database::execute_query_with_prepared_statement(
 ?>
 
 <section class="content">
-    <!-- Default box -->
+
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Utilisateurs</h3>
         </div>
-        <div class="card-body p-0">
-            <table class="table table-striped projects">
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="id-datatable-user" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th style="width: 5%">
-                            #
-                        </th>
-                        <th style="width: 35%">
-                            Utilisateur
-                        </th>
-                        <th style="width: 20%">
-                            Role
-                        </th>
-                        <th>
-                            Actions
-                        </th>
+                        <th>#</th>
+                        <th>Utilisateur</th>
+                        <th>Role</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,13 +60,18 @@ $result = Database::execute_query_with_prepared_statement(
                     <?php $i++;
                     } ?>
                 </tbody>
+                <!-- <tfoot>
+                <tr>
+                  <th>Rendering engine</th>
+                  <th>Browser</th>
+                  <th>Platform(s)</th>
+                  <th>Engine version</th>
+                  <th>CSS grade</th>
+                </tr>
+                </tfoot> -->
             </table>
         </div>
         <!-- /.card-body -->
-        <div class="card-footer">
-            Footer
-        </div>
-        <!-- /.card-footer-->
     </div>
     <!-- /.card -->
 </section>

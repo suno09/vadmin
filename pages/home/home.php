@@ -62,5 +62,6 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <script src="dist/js/notif.js"></script>
+
 </body>
 </html>
