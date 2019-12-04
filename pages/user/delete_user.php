@@ -1,37 +1,44 @@
 <!-- logout modal -->
 <div class="modal fade" id="modal-delete-user">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="delete-modal-title"></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Non">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id='delete-modal-title'></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Non">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="#" method="POST" id="form-delete-user">
+          <div class="form-group row">
+            <div class="col-sm-9">
+              <p>Voulez-vous supprimer ce utilisateur ?</p>
             </div>
-            <div class="modal-body">
-                <p>Voulez vous supprimer ce compte ?</p>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-primary" onclick="">Oui</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
+          </div>
+          <input type="hidden" id="delete-id_user" name="id_user">
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="submit" class="btn btn-primary">Valider</button>
+        <button type="reset" class="btn btn-default" data-dismiss="modal">Annuler</button>
+      </div>
+      </form>
     </div>
-    <!-- /.modal-dialog -->
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>
 
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 
 <script>
-  $('#form-edit-user').submit(function(event) {
+  $('#form-delete-user').submit(function(event) {
     event.preventDefault();
     $.ajax({
       url: "models/user.model.php",
       type: "post",
       timeout: 30000,
-      data: "action=update&" + $('#form-edit-user').serialize(),
+      data: "action=delete&" + $('#form-delete-user').serialize(),
       cache: false,
       success: function(response) {
         jresponse = JSON.parse(response);
@@ -45,7 +52,7 @@
         }
       },
       error: function() {
-        notif('error', "Impossible d'effectuer la modification !");
+        notif('error', "Impossible d'effectuer la suppression !");
         setTimeout(function() {
           window.location.reload(false);
         }, 1000);
@@ -64,17 +71,15 @@
       success: function(response) {
         jresponse = JSON.parse(response);
         if (!jQuery.isEmptyObject(jresponse)) {
-          $("#edit-id_user").val(jresponse.id_user);
-          $("#edit-username").val(jresponse.username);
-          $("#edit-modal_title")[0].innerHTML = "Modifier Utilisateur: " + jresponse.username;
-          $("#edit-role").val(jresponse.role);
-          $("#modal-edit-user").modal("show");
+          $("#delete-id_user").val(jresponse.id_user);
+          $("#delete-modal-title")[0].innerHTML = "Suppression Utilisateur: " + jresponse.username;
+          $("#modal-delete-user").modal("show");
         } else {
-          notif('error', 'Impossible charger la modification !');
+          notif('error', 'Impossible charger la suppression !');
         }
       },
       error: function() {
-        notif('error', 'Impossible charger la modification !');
+        notif('error', 'Impossible charger la suppression !');
         setTimeout(function() {
           window.location.reload(false);
         }, 1000);

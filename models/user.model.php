@@ -1,11 +1,11 @@
 <?php
 include_once('database.model.php');
-// include_once('check_session.php');
+include_once('check_session.php');
 
-// if(!is_session_connected()) {
-//     $response = array("type" => "-1", "message" => "La session a expiré !"); // session expire
-//     echo json_encode($response, JSON_FORCE_OBJECT);
-// } else 
+if(!is_session_connected()) {
+    $response = array("type" => "-1", "message" => "La session a expiré !"); // session expire
+    echo json_encode($response, JSON_FORCE_OBJECT);
+} else 
 switch ($_POST['action']) {
     case 'insert':
         $result = Database::execute_query_with_prepared_statement(
@@ -66,6 +66,13 @@ switch ($_POST['action']) {
         Database::execute_query_with_prepared_statement(
             "update users set password = password(?) where id_user = ?;",
             array(md5($_POST['new_password1']), $_POST['id_user'])
+        );
+        $response = array("type" => "1", "message" => "Opération terminée avec succès !"); // success
+        echo json_encode($response, JSON_FORCE_OBJECT);
+        break;
+    case 'delete':
+        Database::execute_query_with_prepared_statement(
+            "update users set active=0 where id_user=?;", array($_POST['id_user'])
         );
         $response = array("type" => "1", "message" => "Opération terminée avec succès !"); // success
         echo json_encode($response, JSON_FORCE_OBJECT);

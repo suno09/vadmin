@@ -80,6 +80,7 @@
       data: "action=get_by_id&id_user=" + id_user,
       cache: false,
       success: function(response) {
+        // console.log(response);
         jresponse = JSON.parse(response);
         if (!jQuery.isEmptyObject(jresponse)) {
           $("#edit-id_user").val(jresponse.id_user);
