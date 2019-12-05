@@ -63,7 +63,7 @@ class Database {
 	}
 
 	static function execute_query_with_prepared_statement_and_first_row($query, $params=array()){
-		$result = execute_query_with_prepared_statement($query, $params);
+		$result = Database::execute_query_with_prepared_statement($query, $params);
 		if($result->num_rows === 0) {
 			return "";
 		} else {
