@@ -19,8 +19,8 @@ switch ($_POST['action']) {
             $response = array("type" => "0", "message" => "Nom d'utilisateur existe !"); // error username existe
         } else {
             Database::execute_query_with_prepared_statement(
-                "insert into users (username, password, role) values (lower(?), password(?), ?);",
-                array($_POST['username'], md5($_POST['password']), $_POST['role'])
+                "insert into users (username, password, id_rank) values (lower(?), password(?), ?);",
+                array($_POST['username'], md5($_POST['password']), $_POST['rank'])
             );
             $response = array("type" => "1", "message" => "Opération terminée avec succès !"); // success
         }

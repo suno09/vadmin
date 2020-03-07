@@ -2,18 +2,13 @@
 include_once('models/database.model.php');
 
 $result = Database::execute_query_with_prepared_statement(
-    "select id_user, username, role, 
-    case role 
-    when 1 then 'ADMIN'
-    when 2 then 'GERANT'
-    when 3 then 'VENDEUR' end as rolen
-    from users where active=1 and id_user > 1 order by username",
+    "select id_user, username, id_rank, name
+    from users  where active=1 and id_user > 1 order by username",
     array()
 );
 ?>
 
 <section class="content">
-
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Utilisateurs</h3>
